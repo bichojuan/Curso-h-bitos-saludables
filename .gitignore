@@ -1,52 +1,376 @@
-# http://www.gnu.org/software/automake
+```jsx
+import React, { useState } from 'react';
 
-Makefile.in
-/ar-lib
-/mdate-sh
-/py-compile
-/test-driver
-/ylwrap
-.deps/
-.dirstamp
+const App = () => {
+  const [language, setLanguage] = useState('es');
 
-# http://www.gnu.org/software/autoconf
+  // Translations
+  const translations = {
+    es: {
+      heroTitle: "Transforma Tu Vida en Solo 7 Días",
+      heroSubtitle: "Curso completo de hábitos saludables para una vida más energética y equilibrada.",
+      buyNow: "Comprar ahora por 25€",
+      benefitsTitle: "Por Qué Este Curso Es Ideal Para Ti",
+      testimonialsTitle: "Lo Que Dicen Nuestros Alumnos",
+      courseContent: "Contenido del Curso",
+      priceSection: "Precio y Formas de Pago",
+      footerContact: "Contáctanos",
+      footerTerms: "Términos y Condiciones",
+      testimonial1: "Este curso me cambió la vida. Me siento más enérgico y motivado que nunca antes.",
+      testimonial2: "Recomiendo este curso a todos los que quieren mejorar su calidad de vida.",
+      testimonial3: "Fácil de seguir, práctico y con resultados visibles desde el primer día.",
+      module1: "Módulo 1: Introducción a los Hábitos Saludables",
+      module2: "Módulo 2: Alimentación Consciente y Plan de Dieta",
+      module3: "Módulo 3: Ejercicio Físico para Principiantes",
+      module4: "Módulo 4: Horario Ideal y Rutina Diaria",
+      module5: "Módulo 5: Mentalidad y Motivación",
+      module6: "Módulo 6: Cierre y Consejos Finales",
+      weeklyDiet: "Dieta Semanal Saludable – Plan de 7 Días",
+    },
+    en: {
+      heroTitle: "Transform Your Life in Just 7 Days",
+      heroSubtitle: "Complete healthy habits course for a more energetic and balanced life.",
+      buyNow: "Buy now for €25",
+      benefitsTitle: "Why This Course Is Perfect For You",
+      testimonialsTitle: "What Our Students Say",
+      courseContent: "Course Content",
+      priceSection: "Price and Payment Methods",
+      footerContact: "Contact Us",
+      footerTerms: "Terms and Conditions",
+      testimonial1: "This course changed my life. I feel more energetic and motivated than ever before.",
+      testimonial2: "I recommend this course to everyone who wants to improve their quality of life.",
+      testimonial3: "Easy to follow, practical, and with visible results from day one.",
+      module1: "Module 1: Introduction to Healthy Habits",
+      module2: "Module 2: Mindful Eating and Meal Plan",
+      module3: "Module 3: Physical Exercise for Beginners",
+      module4: "Module 4: Ideal Schedule and Daily Routine",
+      module5: "Module 5: Mindset and Motivation",
+      module6: "Module 6: Closing and Final Tips",
+      weeklyDiet: "Healthy Weekly Diet – 7-Day Plan",
+    },
+    zh: {
+      heroTitle: "只需7天，改变你的生活",
+      heroSubtitle: "完整的健康习惯课程，打造更充满活力和平衡的生活。",
+      buyNow: "立即购买，仅需25欧元",
+      benefitsTitle: "为什么这个课程适合你",
+      testimonialsTitle: "学员的评价",
+      courseContent: "课程内容",
+      priceSection: "价格与支付方式",
+      footerContact: "联系我们",
+      footerTerms: "条款与条件",
+      testimonial1: "这门课程改变了我的生活。我比以往任何时候都更有精力和动力。",
+      testimonial2: "我推荐这个课程给所有想提高生活质量的人。",
+      testimonial3: "易于跟随、实用，并且从第一天起就能看到明显效果。",
+      module1: "模块1：健康习惯简介",
+      module2: "模块2：饮食意识和饮食计划",
+      module3: "模块3：初级健身锻炼",
+      module4: "模块4：理想时间表和日常安排",
+      module5: "模块5：心态和动力",
+      module6: "模块6：结课和最终建议",
+      weeklyDiet: "健康周饮食计划 - 7天方案",
+    },
+    ar: {
+      heroTitle: "غيّر حياتك خلال 7 أيام فقط",
+      heroSubtitle: "دورة شاملة لبناء عادات صحية من أجل حياة أكثر نشاطًا وتوازنًا.",
+      buyNow: "اشتري الآن بـ 25 يورو",
+      benefitsTitle: "لماذا هذه الدورة مثالية لك",
+      testimonialsTitle: "ما يقوله طلابنا",
+      courseContent: "محتوى الدورة",
+      priceSection: "السعر وطرق الدفع",
+      footerContact: "اتصل بنا",
+      footerTerms: "الشروط والأحكام",
+      testimonial1: "هذه الدورة غيّرت حياتي. أنا أشعر بالنشاط والطاقة أكثر من أي وقت مضى.",
+      testimonial2: "أنصح الجميع بهذه الدورة الذين يريدون تحسين جودة حياتهم.",
+      testimonial3: "سهلة المتابعة، عملية، مع نتائج واضحة منذ اليوم الأول.",
+      module1: "الوحدة 1: مقدمة عن العادات الصحية",
+      module2: "الوحدة 2: الوعي الغذائي وخطة النظام الغذائي",
+      module3: "الوحدة 3: التمارين الرياضية للمبتدئين",
+      module4: "الوحدة 4: الجدول الزمني المثالي والروتين اليومي",
+      module5: "الوحدة 5: العقلية والتحفيز",
+      module6: "الوحدة 6: الختام والنصائح النهائية",
+      weeklyDiet: "نظام غذائي صحي أسبوعي – خطة 7 أيام",
+    },
+    fr: {
+      heroTitle: "Transformez votre vie en seulement 7 jours",
+      heroSubtitle: "Cours complet d'habitudes saines pour une vie plus énergique et équilibrée.",
+      buyNow: "Acheter maintenant pour 25€",
+      benefitsTitle: "Pourquoi ce cours est fait pour vous",
+      testimonialsTitle: "Ce que disent nos étudiants",
+      courseContent: "Contenu du cours",
+      priceSection: "Prix et modes de paiement",
+      footerContact: "Contactez-nous",
+      footerTerms: "Termes et conditions",
+      testimonial1: "Ce cours a changé ma vie. Je me sens plus énergique et motivé que jamais.",
+      testimonial2: "Je recommande ce cours à tous ceux qui veulent améliorer leur qualité de vie.",
+      testimonial3: "Facile à suivre, pratique, avec des résultats visibles dès le premier jour.",
+      module1: "Module 1 : Introduction aux habitudes saines",
+      module2: "Module 2 : Alimentation consciente et plan alimentaire",
+      module3: "Module 3 : Exercice physique pour débutants",
+      module4: "Module 4 : Horaire idéal et routine quotidienne",
+      module5: "Module 5 : Mentalité et motivation",
+      module6: "Module 6 : Conclusion et conseils finaux",
+      weeklyDiet: "Régime alimentaire hebdomadaire sain – Programme de 7 jours",
+    }
+  };
 
-autom4te.cache
-/autoscan.log
-/autoscan-*.log
-/aclocal.m4
-/compile
-/config.cache
-/config.guess
-/config.h.in
-/config.log
-/config.status
-/config.sub
-/configure
-/configure.scan
-/depcomp
-/install-sh
-/missing
-/stamp-h1
+  const t = translations[language];
 
-# https://www.gnu.org/software/libtool/
+  const toggleLanguage = (lang) => {
+    setLanguage(lang);
+  };
 
-/ltmain.sh
+  return (
+    <div className="font-sans text-gray-800 bg-white">
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-white shadow-md">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <svg className="w-8 h-8 text-green-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <span className="text-xl font-bold text-gray-900">HábitosSaludables</span>
+          </div>
+          
+          {/* Language Selector */}
+          <div className="relative">
+            <button 
+              onClick={() => toggleLanguage(language === 'es' ? 'en' : language === 'en' ? 'zh' : language === 'zh' ? 'ar' : language === 'ar' ? 'fr' : 'es')}
+              className="px-4 py-2 rounded-lg bg-green-100 text-green-700 hover:bg-green-200 transition-colors"
+            >
+              {language.toUpperCase()}
+            </button>
+          </div>
+        </div>
+      </header>
 
-# http://www.gnu.org/software/texinfo
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-green-50 to-blue-50 py-20 md:py-32">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 text-gray-900 leading-tight">
+            {t.heroTitle}
+          </h1>
+          <p className="text-lg md:text-xl mb-10 max-w-3xl mx-auto text-gray-700">
+            {t.heroSubtitle}
+          </p>
+          <a href="#price-section" className="inline-block px-8 py-4 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition-colors">
+            {t.buyNow}
+          </a>
+        </div>
+      </section>
 
-/texinfo.tex
+      {/* Benefits Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-16 text-gray-900">{t.benefitsTitle}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {/* Benefit Card 1 */}
+            <div className="bg-gray-50 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                <svg className="w-8 h-8 text-green-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-center mb-4">Estructura Clara y Práctica</h3>
+              <p className="text-gray-600 text-center">Un programa paso a paso que puedes aplicar desde el primer día sin necesidad de experiencia previa.</p>
+            </div>
+            
+            {/* Benefit Card 2 */}
+            <div className="bg-gray-50 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                <svg className="w-8 h-8 text-green-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-center mb-4">Resultados Visibles Rápidamente</h3>
+              <p className="text-gray-600 text-center">Notarás cambios positivos en tu energía, ánimo y bienestar físico desde las primeras semanas.</p>
+            </div>
+            
+            {/* Benefit Card 3 */}
+            <div className="bg-gray-50 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                <svg className="w-8 h-8 text-green-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-center mb-4">Acceso Flexible y Permanente</h3>
+              <p className="text-gray-600 text-center">Accede al contenido cuando quieras, desde cualquier dispositivo, y revísalo cuantas veces necesites.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-# http://www.gnu.org/software/m4/
+      {/* Google AdSense Placeholder */}
+      <section className="py-10 bg-gray-100">
+        <div className="container mx-auto px-4 text-center">
+          <div className="bg-gray-200 h-20 flex items-center justify-center rounded-lg">
+            <span className="text-gray-500">Espacio para anuncio AdSense</span>
+          </div>
+        </div>
+      </section>
 
-m4/libtool.m4
-m4/ltoptions.m4
-m4/ltsugar.m4
-m4/ltversion.m4
-m4/lt~obsolete.m4
+      {/* Course Content Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-16 text-gray-900">{t.courseContent}</h2>
+          
+          <div className="space-y-10">
+            <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+              <h3 className="text-xl font-bold mb-4 text-green-700">{t.module1}</h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <li>¿Qué son los hábitos saludables?</li>
+                <li>Beneficios físicos, mentales y económicos</li>
+                <li>Objetivo del curso: mejorar tu energía, forma física y bienestar general</li>
+              </ul>
+            </div>
+            
+            <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+              <h3 className="text-xl font-bold mb-4 text-green-700">{t.module2}</h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <li>Principios clave de alimentación consciente</li>
+                <li>Plan de comidas diario con ejemplos prácticos</li>
+                <li>Ejemplo base de desayuno, media mañana, comida, merienda y cena</li>
+              </ul>
+            </div>
+            
+            <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+              <h3 className="text-xl font-bold mb-4 text-green-700">{t.module3}</h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <li>Rutinas diarias de ejercicio para principiantes (20–30 minutos)</li>
+                <li>Diferentes actividades según el día de la semana</li>
+                <li>Ejercicios adaptados para hacer desde casa sin equipo</li>
+              </ul>
+            </div>
+            
+            <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+              <h3 className="text-xl font-bold mb-4 text-green-700">{t.module4}</h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <li>Horario recomendado para maximizar productividad y bienestar</li>
+                <li>Tiempo para trabajo, descanso, ejercicio y relajación</li>
+                <li>Cómo crear una rutina sostenible a largo plazo</li>
+              </ul>
+            </div>
+            
+            <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+              <h3 className="text-xl font-bold mb-4 text-green-700">{t.module5}</h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <li>Técnicas para evitar sabotaje mental</li>
+                <li>Cómo crear cadenas de hábitos efectivas</li>
+                <li>Visualización y afirmaciones matutinas para mantenerte motivado</li>
+              </ul>
+            </div>
+            
+            <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+              <h3 className="text-xl font-bold mb-4 text-green-700">{t.module6}</h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <li>Cómo mantener los hábitos después del curso</li>
+                <li>Recomendación de apps para seguimiento y progreso</li>
+                <li>Consejos para personalizar el programa según tus necesidades</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
-# Generated Makefile
-# (meta build system like autotools,
-# can automatically generate from config.status script
-# (which is called by configure script))
-Makefile
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-16 text-gray-900">{t.testimonialsTitle}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <p className="italic text-gray-700 mb-4">"{t.testimonial1}"</p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-green-200 rounded-full mr-4"></div>
+                <div>
+                  <h4 className="font-semibold">María Sánchez</h4>
+                  <p className="text-sm text-gray-500">Madrid, España</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <p className="italic text-gray-700 mb-4">"{t.testimonial2}"</p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-green-200 rounded-full mr-4"></div>
+                <div>
+                  <h4 className="font-semibold">John Doe</h4>
+                  <p className="text-sm text-gray-500">New York, USA</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <p className="italic text-gray-700 mb-4">"{t.testimonial3}"</p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-green-200 rounded-full mr-4"></div>
+                <div>
+                  <h4 className="font-semibold">Chen Li</h4>
+                  <p className="text-sm text-gray-500">Beijing, China</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Google AdSense Placeholder */}
+      <section className="py-10 bg-gray-100">
+        <div className="container mx-auto px-4 text-center">
+          <div className="bg-gray-200 h-20 flex items-center justify-center rounded-lg">
+            <span className="text-gray-500">Espacio para anuncio AdSense</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Price Section */}
+      <section id="price-section" className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-16 text-gray-900">{t.priceSection}</h2>
+          <div className="max-w-md mx-auto bg-green-600 text-white rounded-xl overflow-hidden shadow-lg transform transition duration-500 hover:scale-105">
+            <div className="p-8 text-center">
+              <h3 className="text-2xl font-bold mb-4">Curso Completo de Hábitos Saludables</h3>
+              <div className="mb-6">
+                <span className="text-5xl font-extrabold">25€</span>
+                <span className="block mt-2 text-green-100">Una sola vez - Acceso de por vida</span>
+              </div>
+              <ul className="text-left mb-8 space-y-2">
+                <li className="flex items-center">
+                  <svg className="w-5 h-5 mr-2 text-green-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 13L9 17L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  Acceso a todo el contenido del curso
+                </li>
+                <li className="flex items-center">
+                  <svg className="w-5 h-5 mr-2 text-green-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 13L9 17L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  Descargas y recursos adicionales
+                </li>
+                <li className="flex items-center">
+                  <svg className="w-5 h-5 mr-2 text-green-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 13L9 17L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  Soporte por correo electrónico
+                </li>
+              </ul>
+              <a href="#" className="block w-full py-4 bg-white text-green-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
+                Comprar Ahora
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Weekly Diet Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-16 text-gray-900">{t.weeklyDiet}</h2>
+          
+          <div classNam
