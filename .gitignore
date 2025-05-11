@@ -374,3 +374,4 @@ const App = () => {
           <h2 className="text-3xl font-bold text-center mb-16 text-gray-900">{t.weeklyDiet}</h2>
           
           <div classNam
+npm run deploy
